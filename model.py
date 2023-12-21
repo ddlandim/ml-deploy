@@ -18,10 +18,9 @@ def inference(csv_path: str = None):
     """
        Receives a text promtp and audio path, and returns a synthesized audio file.
         Parameters:
-        - text (str): Text prompt to be synthesized. Example: 'Hello, my dog is cooler than you!'.
-        - audio_path (str) Optional: File path to save the synthesized audio. Example: 'bark_out.wav'.
+        - csv_path (str): Path to the csv file containing the data to predict.
         Returns:
-        - bool: True if the audio file was saved successfully.
+        - labels (str): Predicted labels.
     """
     if not csv_path:
         data_file = cached_download(

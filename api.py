@@ -5,7 +5,11 @@ import asyncio
 
 app = FastAPI()
 
-@app.post("/inference")
+@app.post("/inference", status_code=200,
+                        response_model=str,
+                        tags=["inference"],
+                        summary="Inference",
+                        description=model_inference.__doc__)
 async def inference(csv_path: str = None):
     try:        
         labels = await asyncio.to_thread(model_inference, csv_path)
