@@ -14,7 +14,7 @@ def load_model():
         ))
     return model
 
-def inference(csv_path: str = "winequality-red.csv"):
+def inference(csv_path: str = None):
     """
        Receives a text promtp and audio path, and returns a synthesized audio file.
         Parameters:
@@ -23,10 +23,13 @@ def inference(csv_path: str = "winequality-red.csv"):
         Returns:
         - bool: True if the audio file was saved successfully.
     """
-    data_file = cached_download(
-    hf_hub_url(REPO_ID, "winequality-red.csv")
-    )
-    winedf = pd.read_csv(data_file, sep=";")
+    if not csv_path:
+        data_file = cached_download(
+        hf_hub_url(REPO_ID, "winequality-red.csv")
+        )
+        winedf = pd.read_csv(data_file, sep=";")
+    else:
+        winedf = pd.read_csv(csv_path, sep=";")
     X = winedf.drop(["quality"], axis=1)
     model = load_model()
     labels = model.predict(X[:3])
