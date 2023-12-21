@@ -4,7 +4,6 @@ from model import inference as model_inference
 import asyncio
 
 app = FastAPI()
-#wandb_d = WandbManager("HumanDetection")
 
 @app.post("/inference")
 async def inference(csv_path: str = None):
